@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { StyleSheet, ScrollView, View } from 'react-native'
 
 const DefaultPage = ({ children }) => (
@@ -25,5 +26,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 })
+
+DefaultPage.propTypes = {
+    children: PropTypes.node.isRequired,
+}
 
 export default DefaultPage
