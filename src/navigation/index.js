@@ -1,23 +1,29 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+import { navigationRef } from './RootNavigation'
 import SceneSplash from '../scenes/auth/sceneSplash'
-import SceneAppLoading from '../scenes/auth/sceneAppLoading'
 import SceneLogin from '../scenes/auth/sceneLogin'
-import SceneHome from '../scenes/auth/sceneHome'
-import SceneGameHome from '../scenes/main/sceneGameHome'
+import SceneHome from '../scenes/main/sceneHome'
 
-const Stack = createStackNavigator()
+const Drawer = createDrawerNavigator()
 
 const Navigation = () => (
-    <NavigationContainer>
-        <Stack.Navigator>
-            <Stack.Screen name="Splash" component={SceneSplash} options={{ headerShown: false }} />
-            <Stack.Screen name="AppLoading" component={SceneAppLoading} />
-            <Stack.Screen name="Login" component={SceneLogin} />
-            <Stack.Screen name="Home" component={SceneHome} />
-            <Stack.Screen name="GameHome" component={SceneGameHome} />
-        </Stack.Navigator>
+    <NavigationContainer ref={navigationRef}>
+        <Drawer.Navigator>
+            <Drawer.Screen 
+                name="Splash" 
+                component={SceneSplash} 
+                options={{ headerShown: false }} />
+            <Drawer.Screen 
+                name="Login" 
+                component={SceneLogin} 
+                options={{ headerShown: false }}/>
+            <Drawer.Screen 
+                name="Home" 
+                component={SceneHome} 
+                options={{ headerShown: false }} />
+        </Drawer.Navigator>
     </NavigationContainer>
 )
 
