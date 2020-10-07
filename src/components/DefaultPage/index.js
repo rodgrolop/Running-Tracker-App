@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, ScrollView, View } from 'react-native'
+import { StyleSheet, ScrollView, View, Dimensions } from 'react-native'
 
 const DefaultPage = ({ children }) => (
     <View style={styles.container}>
@@ -13,12 +13,12 @@ const DefaultPage = ({ children }) => (
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: '100%',
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ddd',
+        backgroundColor: '#fff',
     },
     scroller: {
         flexGrow: 1,

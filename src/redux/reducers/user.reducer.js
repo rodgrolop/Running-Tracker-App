@@ -1,25 +1,36 @@
-import { USER_LOGIN, USER_LOGOUT } from '../actions/user.actions'
+import { USER_LOGIN, USER_LOGOUT, LOADING } from '../actions/user.actions'
 
 const initialState = {
+    loading: false,
     isLoggedIn: false,
+    error: '',
+    user: {},
 }
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case USER_LOGIN: {
-            const { name } = action.payload
             return {
+                ...state,
                 isLoggedIn: true,
-                name,
+                user: action.payload.data,
             }
         }
         case USER_LOGOUT: {
             return {
-                isLoggedIn: false,
+                ...state
+            }
+        }
+        case LOADING: {
+            return {
+                ...state,
+                loading: action.payload.loading,                
             }
         }
         default: {
-            return state
+            return {
+                ...state
+            }
         }
     }
 }

@@ -1,20 +1,24 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { Header } from 'react-native-elements';
+import { Header } from 'react-native-elements'
 import DefaultPage from '../../components/DefaultPage'
+import MenuIcon from '../../components/MenuIcon'
 
-const SceneHome = props => {
+const SceneHome = ({ navigation }) => {
     
     const toggleDrawer = () => {
-        props.navigationProps.toggleDrawer()
+        navigation.toggleDrawer()
     }
 
     return (
         <>
             <Header
-              leftComponent={{ icon: 'menu', color: '#fff' }}
-              centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-              rightComponent={{ icon: 'home', color: '#fff' }}
+              leftComponent={<MenuIcon />}
+              centerComponent={{ text: 'Tracker', style: { color: '#fff' } }}
+              containerStyle={{
+                backgroundColor: '#63257F',
+                justifyContent: 'space-around',
+              }}
             />
             <DefaultPage>        
                 <Text>

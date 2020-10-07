@@ -1,53 +1,111 @@
 import React, { useState } from 'react'
-import { Text, TextInput, Button } from 'react-native'
+import { View, Text, Button, StyleSheet, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DefaultPage from '../../components/DefaultPage'
+import { Input } from 'react-native-elements';
 import { userLogin } from '../../redux/actions/user.actions'
 
-const SceneLogin = ({ loginUser, isUserLoggedIn, storedUserName }) => {
-    const [name, setName] = useState('')
+const initialFormState = {
+    username: 'Test',
+    password: '6665388',
+}
 
+const SceneLogin = (
+        { 
+            loading,
+            isLoggedIn,
+            error,
+            user,
+            loginUser,
+        }
+    ) => {
+    const [formState, setFormState] = useState(initialFormState)
+    
+    const setUserName = username => {
+        setFormState({ ...formState, 'username': username })
+    }
+    
+    const setPassword = password => {
+        setFormState({ ...formState, 'password': password })
+    }
+    
+    const handleLogin = () => {
+        loginUser(formState)
+    }
+    
     return (
         <DefaultPage>
-            <Text>
-                Login
-            </Text>
-            <TextInput
-                style={{
-                    height: 50, width: 200, borderColor: 'gray', borderWidth: 3, padding: 10, margin: 10,
-                }}
-                onChangeText={(text) => setName(text)}
-                value={name}
-            />
+            <View style={styles.loginFormContainer}>
+            <Input 
+                value={formState.username}
+                name="username"
+                id="username"
+                placeholder="Usuario/Email" 
+                style={
+                    styles.loginFormInput
+                }
+                onChangeText={
+                    value => setUserName(value)
+                }/>
+            <Input 
+                value={formState.password}
+                name="password"
+                id="password"
+                placeholder="Contraseña" 
+                style={
+                    styles.loginFormInput
+                }
+                onChangeText={
+                    value => setPassword(value)
+                }
+                secureTextEntry={true}
+                />
             <Button
                 title="Press me"
-                onPress={() => loginUser(name || 'Anon')}
+                onPress={() => handleLogin()}
             />
 
-            { isUserLoggedIn ? (<Text>{`Welcome, ${storedUserName}!`}</Text>) : undefined}
-
+            { loading ? (<Text>{`Welcome, ${user.name}!`}</Text>) : undefined}
+            </View>
         </DefaultPage>
     )
 }
 
 SceneLogin.defaultProps = {
-    storedUserName: '',
+    loading: false,
+    isLoggedIn: false,
+    error: '',
+    user: {},
 }
 
 SceneLogin.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
+    error: PropTypes.string.isRequired,
+    user: PropTypes.object.isRequired,
     loginUser: PropTypes.func.isRequired,
-    isUserLoggedIn: PropTypes.bool.isRequired,
-    storedUserName: PropTypes.string,
 }
 
-const mapStateToProps = (state) => ({
-    storedUserName: state.user.name,
-    isUserLoggedIn: state.user.isLoggedIn,
+const mapStateToProps = state => ({
+    loading: state.user.loading,
+    isLoggedIn: state.user.isLoggedIn,
+    error: state.user.error,
+    user: state.user.user,
+    
 })
 
-const mapDispatchToProps = (dispatch) => ({
-    loginUser: (name) => dispatch(userLogin({ name })),
+const mapDispatchToProps = dispatch => ({
+    loginUser: formState => dispatch(userLogin( formState )),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SceneLogin)
+
+const styles = StyleSheet.create({
+    loginFormContainer: {
+        width: Dimensions.get('window').width * 8 / 10,
+    },
+    loginFormInput: {
+       
+    },
+  });

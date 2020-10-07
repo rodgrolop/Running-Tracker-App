@@ -11,7 +11,7 @@ const Drawer = createDrawerNavigator()
 const DrawerNavigation = () => (
     <NavigationContainer ref={navigationRef}>
         <Drawer.Navigator initialRouteName="Home">
-            <Drawer.Screen name="Splash" component={SceneSplash} options={{ headerShown: false }} />
+            <Drawer.Screen name="Splash" component={SceneSplash} options={{  gestureEnabled: false }} />
             <Drawer.Screen name="Login" component={SceneLogin} options={{ headerShown: false }}/>
             <Drawer.Screen name="Home" component={SceneHome} options={{ headerShown: false }}/>
         </Drawer.Navigator>

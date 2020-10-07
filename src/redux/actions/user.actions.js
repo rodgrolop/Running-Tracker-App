@@ -1,12 +1,22 @@
-export const USER = '[USER]'
-export const USER_LOGIN = `${USER} Set user as logged in`
-export const USER_LOGOUT = `${USER} Set user as logged out`
+export const USER = 'USER'
+export const USER_LOGIN = 'USER_LOGIN'
+export const USER_LOGOUT = 'USER_LOGOUT'
+export const LOADING = 'LOADING'
 
-export const userLogin = ({ name }) => ({
+
+export const userLogin = formState => ({
     type: USER_LOGIN,
     payload: {
-        name,
+        'username': formState.username,
+        'password': formState.password,
     },
+})
+
+export const setLoading = loading => ({
+    type: LOADING,
+    payload: {
+        loading: loading,
+    }
 })
 
 export const userLogout = () => ({
