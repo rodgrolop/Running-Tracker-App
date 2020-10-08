@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, Button, StyleSheet, Dimensions } from 'react-native'
+import { ActivityIndicator, View, Text, Button, StyleSheet, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DefaultPage from '../../components/DefaultPage'
@@ -61,12 +61,14 @@ const SceneLogin = (
                 }
                 secureTextEntry={true}
                 />
-            <Button
-                title="Press me"
-                onPress={() => handleLogin()}
-            />
-
-            { loading ? (<Text>{`Welcome, ${user.name}!`}</Text>) : undefined}
+                { loading ? <ActivityIndicator
+                animating={true}
+                color="#63257F"
+                size={34}
+            /> : <Button
+            title="Press me"
+            onPress={() => handleLogin()}
+        />}
             </View>
         </DefaultPage>
     )
