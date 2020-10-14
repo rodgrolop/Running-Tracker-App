@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import { Button } from 'react-native-paper'
 import { connect } from 'react-redux'
@@ -12,13 +12,14 @@ const initialFormState = {
     password: '6665388',
 }
 
-const SceneLogin = ( props,
-        { 
+const SceneLogin = ( 
+        {   
             loading,
             isLoggedIn,
             error,
             user,
             loginUser,
+            ...props
         }
     ) => {
         
@@ -28,13 +29,7 @@ const SceneLogin = ( props,
     
     const [secureTextEntry, setSecureTextEntry] = useState(true)
     
-    const [userInputColor, setUserInputColor] = useState(colors.blurInput)
-    
     const [passwordInputColor, setPasswordInputColor] = useState(colors.blurInput)
-    
-    const passwordInput = useRef(null)
-    
-    const userInput = useRef(null)
     
     const setUserName = username => setFormState({ ...formState, 'username': username })
     
@@ -43,7 +38,6 @@ const SceneLogin = ( props,
     const handleLogin = () => loginUser(formState)
     
     const changePasswordVisibility = () => {
-        passwordInput.current.focus()
         setSecureTextEntry(!secureTextEntry)
     }
     
@@ -61,30 +55,6 @@ const SceneLogin = ( props,
                 mode="outlined"
                 selectTextOnFocus={true}
                 selectionColor={colors.selectionColor}
-                ref={userInput}
-                autoFocus={true}
-                onFocus={
-                    () => 
-                    setUserInputColor(colors.primary)
-                }
-                onBlur={
-                    () => 
-                    setUserInputColor(colors.blurInput)
-                }
-                left={
-                    <TextInput.Icon 
-                        icon="account-circle"
-                        color={userInputColor}
-                        style={
-                            styles.loginFormInputIcon
-                        }
-                    />
-                }
-                leftIconContainerStyle={
-                    {  
-                        marginRight: 10,
-                    }
-                }
                 style={
                     styles.loginFormInput
                 }
@@ -103,7 +73,6 @@ const SceneLogin = ( props,
                 mode="outlined"
                 selectTextOnFocus={true}
                 selectionColor={colors.selectionColor}
-                ref={passwordInput}
                 onFocus={
                     () => 
                     setPasswordInputColor(colors.primary)
@@ -111,15 +80,6 @@ const SceneLogin = ( props,
                 onBlur={
                     () => 
                     setPasswordInputColor(colors.blurInput)
-                }
-                left={
-                    <TextInput.Icon 
-                        icon="key"
-                        color={passwordInputColor}
-                        style={
-                            styles.loginFormInputIcon
-                        }
-                    />
                 }
                 right={
                     <TextInput.Icon 
@@ -139,7 +99,7 @@ const SceneLogin = ( props,
                     />
                 }
                 style={
-                    styles.loginFormInput
+                    styles.loginFormInputPass
                 }
                 onChangeText={
                     value => 
@@ -196,8 +156,7 @@ const mapStateToProps = state => ({
     loading: state.user.loading,
     isLoggedIn: state.user.isLoggedIn,
     error: state.user.error,
-    user: state.user.user,
-    
+    user: state.user.user,    
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -208,13 +167,14 @@ export default withTheme(connect(mapStateToProps, mapDispatchToProps)(SceneLogin
 
 const styles = StyleSheet.create({
     loginFormContainer: {
-        width: Dimensions.get('window').width * 8 / 10,
+        width: Dimensions.get('window').width,
+        paddingHorizontal: Dimensions.get('window').width / 10,
     },
     loginFormInput: {
         marginBottom: 10,
     },
-    loginFormInputIcon: {
-        
+    loginFormInputPass: {
+        marginBottom: 20,
     },
     loginFormInputIconPass: {
         

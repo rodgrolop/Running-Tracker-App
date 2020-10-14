@@ -1,36 +1,7 @@
 import { USER_LOGIN, LOADING, setLoading } from '../../actions/user.actions'
-import { loginUser } from '../../api/userApi';
 import * as RootNavigation from '../../../navigation/RootNavigation'
 
-
-// Temp
-
-
 import axios from 'axios'
-
-
-// const userMiddleware = store => next => action => {  
-  
-//   if (action.type === USER_LOGIN) {   
-    
-//     store.dispatch(setLoading(true))
-    
-//     const loginResponse = loginUser(action.payload) 
-//     console.log(loginResponse)
-//     if (loginResponse == null) {      
-      
-//         next(action) // continue with the login
-
-//         setTimeout(() => { // wait a moment before triggering the navigation
-//             // RootNavigation.navigate('Home')
-//         }, 2000)
-//     }
-//   }
-  
-//   if (action.type === LOADING) {
-//         next(action) // continue with the login
-//   }
-// }
 
 const userMiddleware = store => next => action => {  
   
@@ -51,7 +22,7 @@ const userMiddleware = store => next => action => {
       },
     })
     .then(responseJson => {
-      store.dispatch(setLoading(false))
+      next(action)
       RootNavigation.navigate('Home')
       return responseJson
     })
@@ -59,7 +30,7 @@ const userMiddleware = store => next => action => {
   }
   
   if (action.type === LOADING) {
-        next(action) // continue with the login
+        next(action)
   }
 }
 

@@ -5,6 +5,7 @@ export default theme = {
     roundness: 2,
     colors: {
       ...DefaultTheme.colors,
+      background: '#fff',
       primary: '#63257F',
       accent: '#63257F',
       blurInput: '#ccc',

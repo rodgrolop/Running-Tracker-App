@@ -12,6 +12,7 @@ import { initialiseApplication } from './src/redux/actions/application.actions'
 // Components imports
 import Navigation from './src/navigation'
 
+// TODO check if it goes here or in navigation stack
 enableScreens()
 
 // Redux declarations

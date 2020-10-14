@@ -1,30 +1,55 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+import { connect } from 'react-redux'
 import { navigationRef } from './RootNavigation'
+import PropTypes from 'prop-types'
 import SceneSplash from '../scenes/auth/sceneSplash'
 import SceneLogin from '../scenes/auth/sceneLogin'
 import SceneHome from '../scenes/main/sceneHome'
 
-const Drawer = createDrawerNavigator()
+const Stack = createNativeStackNavigator()
 
-const Navigation = () => (
+const Navigation = ( 
+        {   
+            isLoggedIn,
+        }
+    ) => (
     <NavigationContainer ref={navigationRef}>
-        <Drawer.Navigator>
-            <Drawer.Screen 
-                name="Splash" 
-                component={SceneSplash} 
-                options={{ headerShown: false }} />
-            <Drawer.Screen 
-                name="Login" 
-                component={SceneLogin} 
-                options={{ headerShown: false }}/>
-            <Drawer.Screen 
+        <Stack.Navigator>
+        {isLoggedIn ? 
+            (
+            <Stack.Screen 
                 name="Home" 
                 component={SceneHome} 
                 options={{ headerShown: false }} />
-        </Drawer.Navigator>
+            ) : (
+            <>
+                <Stack.Screen 
+                    name="Splash" 
+                    component={SceneSplash} 
+                    options={{ headerShown: false }} />
+                <Stack.Screen 
+                    name="Login" 
+                    component={SceneLogin} 
+                    options={{ headerShown: false }}/>
+            </>
+            ) 
+        }           
+        </Stack.Navigator>
     </NavigationContainer>
 )
 
-export default Navigation
+SceneLogin.defaultProps = {
+    isLoggedIn: false,
+}
+
+SceneLogin.propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+}
+
+const mapStateToProps = state => ({
+    isLoggedIn: state.user.isLoggedIn,    
+})
+
+export default connect(mapStateToProps)(Navigation)
