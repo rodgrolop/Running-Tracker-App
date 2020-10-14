@@ -3,6 +3,7 @@ import React from 'react'
 import { enableScreens } from 'react-native-screens'
 import { Provider as PaperProvider } from 'react-native-paper'
 import theme from './src/theme'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
 // Redux imports
 import { Provider } from 'react-redux'
@@ -23,8 +24,10 @@ export default function App() {
   return (
     <Provider store={store}>
       <PaperProvider theme={theme}>
-        <StatusBar style="auto" />
-        <Navigation />
+        <SafeAreaProvider>
+          <StatusBar style="auto" />
+          <Navigation />
+        </SafeAreaProvider>
       </PaperProvider>
     </Provider>
   );

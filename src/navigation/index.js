@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from 'react-native-screens/native-stack'
+import { createDrawerNavigator } from '@react-navigation/drawer'
 import { connect } from 'react-redux'
 import { navigationRef } from './RootNavigation'
 import PropTypes from 'prop-types'
@@ -10,18 +11,26 @@ import SceneHome from '../scenes/main/sceneHome'
 
 const Stack = createNativeStackNavigator()
 
+const Drawer = createDrawerNavigator()
+
+const Home = () =>
+    <Drawer.Navigator>
+        <Drawer.Screen name="Home" component={SceneHome} />
+    </Drawer.Navigator>
+
+
 const Navigation = ( 
         {   
             isLoggedIn,
         }
     ) => (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer ref={navigationRef}>   
         <Stack.Navigator>
         {isLoggedIn ? 
             (
             <Stack.Screen 
                 name="Home" 
-                component={SceneHome} 
+                component={Home} 
                 options={{ headerShown: false }} />
             ) : (
             <>
