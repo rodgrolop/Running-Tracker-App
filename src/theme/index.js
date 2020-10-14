@@ -7,5 +7,7 @@ export default theme = {
       ...DefaultTheme.colors,
       primary: '#63257F',
       accent: '#63257F',
+      blurInput: '#ccc',
+      selectionColor: '#63257F55',
     },
   };

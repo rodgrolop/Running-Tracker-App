@@ -4,7 +4,7 @@ import { Button } from 'react-native-paper'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DefaultPage from '../../components/DefaultPage'
-import { TextInput } from 'react-native-paper'
+import { TextInput, withTheme } from 'react-native-paper'
 import { userLogin } from '../../redux/actions/user.actions'
 
 const initialFormState = {
@@ -12,7 +12,7 @@ const initialFormState = {
     password: '6665388',
 }
 
-const SceneLogin = (
+const SceneLogin = ( props,
         { 
             loading,
             isLoggedIn,
@@ -22,13 +22,15 @@ const SceneLogin = (
         }
     ) => {
         
+    const { colors } = props.theme
+        
     const [formState, setFormState] = useState(initialFormState)
     
     const [secureTextEntry, setSecureTextEntry] = useState(true)
     
-    const [userInputColor, setUserInputColor] = useState("#ccc")
+    const [userInputColor, setUserInputColor] = useState(colors.blurInput)
     
-    const [passwordInputColor, setPasswordInputColor] = useState("#ccc")
+    const [passwordInputColor, setPasswordInputColor] = useState(colors.blurInput)
     
     const passwordInput = useRef(null)
     
@@ -58,16 +60,16 @@ const SceneLogin = (
                 placeholder="Usuario/Email"
                 mode="outlined"
                 selectTextOnFocus={true}
-                selectionColor="#63257F55"
+                selectionColor={colors.selectionColor}
                 ref={userInput}
                 autoFocus={true}
                 onFocus={
                     () => 
-                    setUserInputColor("#63257F")
+                    setUserInputColor(colors.primary)
                 }
                 onBlur={
                     () => 
-                    setUserInputColor("#ccc")
+                    setUserInputColor(colors.blurInput)
                 }
                 left={
                     <TextInput.Icon 
@@ -87,7 +89,8 @@ const SceneLogin = (
                     styles.loginFormInput
                 }
                 onChangeText={
-                    value => setUserName(value)
+                    value => 
+                    setUserName(value)
                 }/>
             <TextInput 
                 value={
@@ -99,19 +102,19 @@ const SceneLogin = (
                 placeholder="Contraseña"
                 mode="outlined"
                 selectTextOnFocus={true}
-                selectionColor="#63257F55"
+                selectionColor={colors.selectionColor}
                 ref={passwordInput}
                 onFocus={
                     () => 
-                    setPasswordInputColor("#63257F")
+                    setPasswordInputColor(colors.primary)
                 }
                 onBlur={
                     () => 
-                    setPasswordInputColor("#ccc")
+                    setPasswordInputColor(colors.blurInput)
                 }
                 left={
                     <TextInput.Icon 
-                        icon="lock"
+                        icon="key"
                         color={passwordInputColor}
                         style={
                             styles.loginFormInputIcon
@@ -139,15 +142,17 @@ const SceneLogin = (
                     styles.loginFormInput
                 }
                 onChangeText={
-                    value => setPassword(value)
+                    value => 
+                    setPassword(value)
                 }
                 secureTextEntry={secureTextEntry}
                 />                
             <Button
                 loading={loading}
                 icon={
-                    !loading && 
-                    "arrow-right-circle"
+                    isLoggedIn ?  
+                    "lock-open" : 
+                    "lock"
                 } 
                 mode="contained"
                 onPress={
@@ -156,7 +161,12 @@ const SceneLogin = (
                 }
                 contentStyle={
                     {
-                        height: 60
+                        height: 60,
+                    }
+                }
+                labelStyle={
+                    {
+                        fontSize: 16,
                     }
                 }
                 >
@@ -194,7 +204,7 @@ const mapDispatchToProps = dispatch => ({
     loginUser: formState => dispatch(userLogin( formState )),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SceneLogin)
+export default withTheme(connect(mapStateToProps, mapDispatchToProps)(SceneLogin))
 
 const styles = StyleSheet.create({
     loginFormContainer: {
@@ -207,6 +217,6 @@ const styles = StyleSheet.create({
         
     },
     loginFormInputIconPass: {
-        zIndex:999
+        
     },
   });
