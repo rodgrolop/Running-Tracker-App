@@ -1,25 +1,17 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { Header } from 'react-native-elements'
+import { Appbar } from 'react-native-paper'
 import DefaultPage from '../../components/DefaultPage'
+import { StyleSheet } from 'react-native'
 import MenuIcon from '../../components/MenuIcon'
 
-const SceneHome = ({ navigation }) => {
-    
-    const toggleDrawer = () => {
-        navigation.toggleDrawer()
-    }
+const SceneHome = () => {
 
     return (
         <>
-            <Header
-              leftComponent={<MenuIcon />}
-              centerComponent={{ text: 'Tracker', style: { color: '#fff' } }}
-              containerStyle={{
-                backgroundColor: '#63257F',
-                justifyContent: 'space-around',
-              }}
-            />
+            <Appbar.Header>
+            <MenuIcon/>   
+            </Appbar.Header>
             <DefaultPage>        
                 <Text>
                     Home
@@ -30,3 +22,12 @@ const SceneHome = ({ navigation }) => {
 }
 
 export default SceneHome
+
+const styles = StyleSheet.create({
+    bottom: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+    },
+  });

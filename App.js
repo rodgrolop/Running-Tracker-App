@@ -1,6 +1,8 @@
 import { StatusBar } from 'expo-status-bar'
-import React from 'react';
+import React from 'react'
 import { enableScreens } from 'react-native-screens'
+import { Provider as PaperProvider } from 'react-native-paper'
+import theme from './src/theme'
 
 // Redux imports
 import { Provider } from 'react-redux'
@@ -19,8 +21,10 @@ store.dispatch(initialiseApplication())
 export default function App() {
   return (
     <Provider store={store}>
-      <StatusBar style="auto" />
-      <Navigation />
+      <PaperProvider theme={theme}>
+        <StatusBar style="auto" />
+        <Navigation />
+      </PaperProvider>
     </Provider>
   );
 }

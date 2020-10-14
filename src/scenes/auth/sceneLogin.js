@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import { ActivityIndicator, View, Text, Button, StyleSheet, Dimensions } from 'react-native'
+import React, { useState, useRef } from 'react'
+import { View, StyleSheet, Dimensions } from 'react-native'
+import { Button } from 'react-native-paper'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DefaultPage from '../../components/DefaultPage'
-import { Input } from 'react-native-elements';
+import { TextInput } from 'react-native-paper'
 import { userLogin } from '../../redux/actions/user.actions'
 
 const initialFormState = {
@@ -20,55 +21,147 @@ const SceneLogin = (
             loginUser,
         }
     ) => {
+        
     const [formState, setFormState] = useState(initialFormState)
     
-    const setUserName = username => {
-        setFormState({ ...formState, 'username': username })
-    }
+    const [secureTextEntry, setSecureTextEntry] = useState(true)
     
-    const setPassword = password => {
-        setFormState({ ...formState, 'password': password })
-    }
+    const [userInputColor, setUserInputColor] = useState("#ccc")
     
-    const handleLogin = () => {
-        loginUser(formState)
+    const [passwordInputColor, setPasswordInputColor] = useState("#ccc")
+    
+    const passwordInput = useRef(null)
+    
+    const userInput = useRef(null)
+    
+    const setUserName = username => setFormState({ ...formState, 'username': username })
+    
+    const setPassword = password => setFormState({ ...formState, 'password': password })
+    
+    const handleLogin = () => loginUser(formState)
+    
+    const changePasswordVisibility = () => {
+        passwordInput.current.focus()
+        setSecureTextEntry(!secureTextEntry)
     }
     
     return (
         <DefaultPage>
             <View style={styles.loginFormContainer}>
-            <Input 
-                value={formState.username}
+            <TextInput 
+                value={
+                    formState.username
+                }
                 name="username"
                 id="username"
-                placeholder="Usuario/Email" 
+                label="Usuario/Email"
+                placeholder="Usuario/Email"
+                mode="outlined"
+                selectTextOnFocus={true}
+                selectionColor="#63257F55"
+                ref={userInput}
+                autoFocus={true}
+                onFocus={
+                    () => 
+                    setUserInputColor("#63257F")
+                }
+                onBlur={
+                    () => 
+                    setUserInputColor("#ccc")
+                }
+                left={
+                    <TextInput.Icon 
+                        icon="account-circle"
+                        color={userInputColor}
+                        style={
+                            styles.loginFormInputIcon
+                        }
+                    />
+                }
+                leftIconContainerStyle={
+                    {  
+                        marginRight: 10,
+                    }
+                }
                 style={
                     styles.loginFormInput
                 }
                 onChangeText={
                     value => setUserName(value)
                 }/>
-            <Input 
-                value={formState.password}
+            <TextInput 
+                value={
+                    formState.password
+                }
                 name="password"
                 id="password"
-                placeholder="Contraseña" 
+                label="Contraseña"
+                placeholder="Contraseña"
+                mode="outlined"
+                selectTextOnFocus={true}
+                selectionColor="#63257F55"
+                ref={passwordInput}
+                onFocus={
+                    () => 
+                    setPasswordInputColor("#63257F")
+                }
+                onBlur={
+                    () => 
+                    setPasswordInputColor("#ccc")
+                }
+                left={
+                    <TextInput.Icon 
+                        icon="lock"
+                        color={passwordInputColor}
+                        style={
+                            styles.loginFormInputIcon
+                        }
+                    />
+                }
+                right={
+                    <TextInput.Icon 
+                        icon={
+                            secureTextEntry ? 
+                            "eye" : 
+                            "eye-off"
+                        }
+                        color={passwordInputColor}
+                        style={
+                            styles.loginFormInputIconPass
+                        }
+                        onPress={
+                            () => 
+                            changePasswordVisibility()
+                        }
+                    />
+                }
                 style={
                     styles.loginFormInput
                 }
                 onChangeText={
                     value => setPassword(value)
                 }
-                secureTextEntry={true}
-                />
-                { loading ? <ActivityIndicator
-                animating={true}
-                color="#63257F"
-                size={34}
-            /> : <Button
-            title="Press me"
-            onPress={() => handleLogin()}
-        />}
+                secureTextEntry={secureTextEntry}
+                />                
+            <Button
+                loading={loading}
+                icon={
+                    !loading && 
+                    "arrow-right-circle"
+                } 
+                mode="contained"
+                onPress={
+                    () => 
+                    handleLogin()
+                }
+                contentStyle={
+                    {
+                        height: 60
+                    }
+                }
+                >
+                Login
+            </Button>
             </View>
         </DefaultPage>
     )
@@ -108,6 +201,12 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * 8 / 10,
     },
     loginFormInput: {
-       
+        marginBottom: 10,
+    },
+    loginFormInputIcon: {
+        
+    },
+    loginFormInputIconPass: {
+        zIndex:999
     },
   });
