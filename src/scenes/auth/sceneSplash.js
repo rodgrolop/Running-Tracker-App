@@ -37,9 +37,9 @@ export default SceneSplash
 
 const styles = StyleSheet.create({
     image: {
-      width: Dimensions.get('window').width / 4,
-      height: Dimensions.get('window').width / 4,
-      margin: Dimensions.get('window').width / 10,
-      resizeMode: 'contain',
+        width: Dimensions.get('window').width / 4,
+        height: Dimensions.get('window').width / 4,
+        margin: Dimensions.get('window').width / 10,
+        resizeMode: 'contain',
     },
-  });
+})

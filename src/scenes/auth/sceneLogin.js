@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
     loginFormInputIconPass: {
         
     },
-  });
+})

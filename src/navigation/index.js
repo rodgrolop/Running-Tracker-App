@@ -5,6 +5,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { connect } from 'react-redux'
 import { navigationRef } from './RootNavigation'
 import PropTypes from 'prop-types'
+import DrawerContent from './../components/DrawerContent'
 import SceneSplash from '../scenes/auth/sceneSplash'
 import SceneLogin from '../scenes/auth/sceneLogin'
 import SceneHome from '../scenes/main/sceneHome'
@@ -13,9 +14,10 @@ const Stack = createNativeStackNavigator()
 
 const Drawer = createDrawerNavigator()
 
-const Home = () =>
-    <Drawer.Navigator>
+const MainDrawer = () =>
+    <Drawer.Navigator drawerContent={() => <DrawerContent />}>
         <Drawer.Screen name="Home" component={SceneHome} />
+        <Drawer.Screen name="Login" component={SceneLogin} />
     </Drawer.Navigator>
 
 
@@ -30,7 +32,7 @@ const Navigation = (
             (
             <Stack.Screen 
                 name="Home" 
-                component={Home} 
+                component={MainDrawer} 
                 options={{ headerShown: false }} />
             ) : (
             <>

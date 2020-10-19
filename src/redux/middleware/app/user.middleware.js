@@ -1,4 +1,4 @@
-import { USER_LOGIN, LOADING, setLoading } from '../../actions/user.actions'
+import { USER_LOGIN, SET_USER, LOADING, setUser, setLoading } from '../../actions/user.actions'
 import * as RootNavigation from '../../../navigation/RootNavigation'
 
 import axios from 'axios'
@@ -22,15 +22,18 @@ const userMiddleware = store => next => action => {
       },
     })
     .then(responseJson => {
-      next(action)
+      store.dispatch(setUser(responseJson.data))
       RootNavigation.navigate('Home')
-      return responseJson
     })
     .catch(error => error);
   }
   
+  if (action.type === SET_USER) {
+    next(action)
+  }
+  
   if (action.type === LOADING) {
-        next(action)
+    next(action)
   }
 }
 

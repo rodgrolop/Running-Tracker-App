@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
+import { StatusBar } from 'expo-status-bar'
 import { enableScreens } from 'react-native-screens'
 import { Provider as PaperProvider } from 'react-native-paper'
-import theme from './src/theme'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import theme from './src/theme'
 
 // Redux imports
 import { Provider } from 'react-redux'
@@ -25,7 +25,7 @@ export default function App() {
     <Provider store={store}>
       <PaperProvider theme={theme}>
         <SafeAreaProvider>
-          <StatusBar style="auto" />
+          <StatusBar style='auto' />
           <Navigation />
         </SafeAreaProvider>
       </PaperProvider>

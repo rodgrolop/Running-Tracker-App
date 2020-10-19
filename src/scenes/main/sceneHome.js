@@ -1,17 +1,14 @@
 import React from 'react'
 import { Text } from 'react-native'
-import { Appbar } from 'react-native-paper'
-import DefaultPage from '../../components/DefaultPage'
 import { StyleSheet } from 'react-native'
-import MenuIcon from '../../components/MenuIcon'
+import Header from './../../components/Header'
+import DefaultPage from '../../components/DefaultPage'
 
 const SceneHome = () => {
 
     return (
         <>
-            <Appbar.Header>
-            <MenuIcon/>   
-            </Appbar.Header>
+            <Header/>
             <DefaultPage>        
                 <Text>
                     Home
