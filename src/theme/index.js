@@ -6,6 +6,7 @@ export default theme = {
     colors: {
       ...DefaultTheme.colors,
       background: '#fff',
+      surface: '#fff', 
       primary: '#63257F',
       accent: '#63257F',
       blurInput: '#ccc',

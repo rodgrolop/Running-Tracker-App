@@ -1,7 +1,9 @@
 import coreMiddleware from './core'
-import appMiddleware from './app'
+import userMiddleware from './user'
+import trackingMiddleware from './tracking'
 
 export default [
     ...coreMiddleware,
-    ...appMiddleware,
+    ...userMiddleware,
+    ...trackingMiddleware,
 ]

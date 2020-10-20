@@ -1,5 +1,5 @@
 /* eslint no-console: ["error", { allow: ["time", "timeEnd", "log"] }] */
-const measureMiddleware = () => (next) => (action) => {
+const measureMiddleware = () => next => action => {
     const isMeasured = action.meta && action.meta.measure
 
     if (isMeasured) {

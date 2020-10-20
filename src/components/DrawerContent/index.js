@@ -8,7 +8,6 @@ import { Drawer } from 'react-native-paper'
 
 
 const DrawerContent = ({ user }) => {
-console.log(user)
 
 return (
   <SafeAreaView>

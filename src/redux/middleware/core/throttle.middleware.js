@@ -1,6 +1,6 @@
 const throttled = {}
 
-const throttleMiddleware = () => (next) => (action) => {
+const throttleMiddleware = () => next => action => {
     const time = action.meta && action.meta.throttle
 
     if (!time) {

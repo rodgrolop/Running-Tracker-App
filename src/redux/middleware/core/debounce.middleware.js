@@ -1,6 +1,6 @@
 const pending = {}
 
-const debounceMiddleware = () => (next) => (action) => {
+const debounceMiddleware = () => next => action => {
     const { debounce } = action.meta || {}
 
     if (!debounce) {

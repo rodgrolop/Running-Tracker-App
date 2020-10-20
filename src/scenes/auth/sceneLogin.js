@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
+import { View, Image, StyleSheet, Dimensions } from 'react-native'
 import { Button } from 'react-native-paper'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DefaultPage from '../../components/DefaultPage'
 import { TextInput, withTheme } from 'react-native-paper'
-import { userLogin } from '../../redux/actions/user.actions'
+import { userLogin } from '../../redux/api/user.api'
 
 const initialFormState = {
     username: 'Test',
@@ -18,7 +18,6 @@ const SceneLogin = (
             isLoggedIn,
             error,
             user,
-            loginUser,
             ...props
         }
     ) => {
@@ -35,7 +34,7 @@ const SceneLogin = (
     
     const setPassword = password => setFormState({ ...formState, 'password': password })
     
-    const handleLogin = () => loginUser(formState)
+    const handleLogin = () => userLogin(formState)
     
     const changePasswordVisibility = () => {
         setSecureTextEntry(!secureTextEntry)
@@ -43,95 +42,105 @@ const SceneLogin = (
     
     return (
         <DefaultPage>
+            <View style={styles.imgContainer}>
+                <Image
+                    source={require('../../image/logo.png')}
+                    style={styles.image}
+                    resizeMode='contain'
+                />
+            </View>
             <View style={styles.loginFormContainer}>
-            <TextInput 
-                value={
-                    formState.username
-                }
-                name="username"
-                id="username"
-                label="Usuario/Email"
-                placeholder="Usuario/Email"
-                mode="outlined"
-                selectTextOnFocus={true}
-                selectionColor={colors.selectionColor}
-                style={
-                    styles.loginFormInput
-                }
-                onChangeText={
-                    value => 
-                    setUserName(value)
-                }/>
-            <TextInput 
-                value={
-                    formState.password
-                }
-                name="password"
-                id="password"
-                label="Contraseña"
-                placeholder="Contraseña"
-                mode="outlined"
-                selectTextOnFocus={true}
-                selectionColor={colors.selectionColor}
-                onFocus={
-                    () => 
-                    setPasswordInputColor(colors.primary)
-                }
-                onBlur={
-                    () => 
-                    setPasswordInputColor(colors.blurInput)
-                }
-                right={
-                    <TextInput.Icon 
-                        icon={
-                            secureTextEntry ? 
-                            "eye" : 
-                            "eye-off"
-                        }
-                        color={passwordInputColor}
-                        style={
-                            styles.loginFormInputIconPass
-                        }
-                        onPress={
-                            () => 
-                            changePasswordVisibility()
-                        }
-                    />
-                }
-                style={
-                    styles.loginFormInputPass
-                }
-                onChangeText={
-                    value => 
-                    setPassword(value)
-                }
-                secureTextEntry={secureTextEntry}
-                />                
-            <Button
-                loading={loading}
-                icon={
-                    isLoggedIn ?  
-                    "lock-open" : 
-                    "lock"
-                } 
-                mode="contained"
-                onPress={
-                    () => 
-                    handleLogin()
-                }
-                contentStyle={
-                    {
-                        height: 60,
+                <TextInput 
+                    value={
+                        formState.username
                     }
-                }
-                labelStyle={
-                    {
-                        fontSize: 16,
+                    name="username"
+                    id="username"
+                    label="Usuario/Email"
+                    placeholder="Usuario/Email"
+                    mode="outlined"
+                    selectTextOnFocus={true}
+                    selectionColor={colors.selectionColor}
+                    style={
+                        styles.loginFormInput
                     }
-                }
-                >
-                Login
-            </Button>
+                    onChangeText={
+                        value => 
+                        setUserName(value)
+                    }/>
+                <TextInput 
+                    value={
+                        formState.password
+                    }
+                    name="password"
+                    id="password"
+                    label="Contraseña"
+                    placeholder="Contraseña"
+                    mode="outlined"
+                    selectTextOnFocus={true}
+                    selectionColor={colors.selectionColor}
+                    onFocus={
+                        () => 
+                        setPasswordInputColor(colors.primary)
+                    }
+                    onBlur={
+                        () => 
+                        setPasswordInputColor(colors.blurInput)
+                    }
+                    right={
+                        <TextInput.Icon 
+                            icon={
+                                secureTextEntry ? 
+                                "eye" : 
+                                "eye-off"
+                            }
+                            color={passwordInputColor}
+                            style={
+                                styles.loginFormInputIconPass
+                            }
+                            onPress={
+                                () => 
+                                changePasswordVisibility()
+                            }
+                        />
+                    }
+                    style={
+                        styles.loginFormInputPass
+                    }
+                    onChangeText={
+                        value => 
+                        setPassword(value)
+                    }
+                    secureTextEntry={secureTextEntry}
+                    />                
+                <Button
+                    loading={loading}
+                    icon={
+                        isLoggedIn ?  
+                        "lock-open" : 
+                        "lock"
+                    } 
+                    mode="contained"
+                    onPress={
+                        () => 
+                        handleLogin()
+                    }
+                    style={
+                        styles.loginFormButton
+                    }
+                    contentStyle={
+                        {
+                            height: 60,
+                        }
+                    }
+                    labelStyle={
+                        {
+                            fontSize: 16,
+                        }
+                    }
+                    >
+                    Login
+                </Button>
             </View>
         </DefaultPage>
     )
@@ -149,7 +158,6 @@ SceneLogin.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
     error: PropTypes.string.isRequired,
     user: PropTypes.object.isRequired,
-    loginUser: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -159,16 +167,28 @@ const mapStateToProps = state => ({
     user: state.user.user,    
 })
 
-const mapDispatchToProps = dispatch => ({
-    loginUser: formState => dispatch(userLogin( formState )),
-})
+export default withTheme(connect(mapStateToProps)(SceneLogin))
 
-export default withTheme(connect(mapStateToProps, mapDispatchToProps)(SceneLogin))
+// Styles
+
+const screenWidth = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
     loginFormContainer: {
-        width: Dimensions.get('window').width,
-        paddingHorizontal: Dimensions.get('window').width / 10,
+        width: screenWidth,
+        marginVertical: 0,
+        paddingHorizontal: screenWidth / 10,
+    },
+    imgContainer: {
+        width: screenWidth,
+        display: 'flex',
+        paddingHorizontal: screenWidth / 4,
+    },
+    image: {
+        width: screenWidth / 2,
+        height: undefined,
+        // figure out your image aspect ratio
+        aspectRatio: 8 / 3,      
     },
     loginFormInput: {
         marginBottom: 10,
@@ -179,4 +199,7 @@ const styles = StyleSheet.create({
     loginFormInputIconPass: {
         
     },
+    loginFormButton: {
+        elevation: 4,
+    }
 })

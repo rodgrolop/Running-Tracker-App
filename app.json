@@ -1,23 +1,48 @@
 {
   "expo": {
-    "name": "run-track-app",
-    "slug": "run-track-app",
-    "version": "1.0.0",
+    "name": "San Silvestre Tracker",
+    "slug": "sansilvestretracker",
+    "version": "0.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "./assets*",
+      "./src/image/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.madisonmk.sansilvestretracker",
+      "buildNumber": "0.0.0",
+      "infoPlist": {
+        
+      },
+      "splash": {
+        "image": "./assets/img/splash-screens/ios/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "android": {
+      "package": "com.madisonmk.sansilvestretracker",
+      "versionCode": 0,
+      "splash": {
+        "ldpi": "./assets/img/splash-screens/android/drawable-ldpi/splash.png",
+        "mdpi": "./assets/img/splash-screens/android/drawable-mdpi/splash.png",
+        "hdpi": "./assets/img/splash-screens/android/drawable-hdpi/splash.png",
+        "xhdpi": "./assets/img/splash-screens/android/drawable-xhdpi/splash.png",
+        "xxhdpi": "./assets/img/splash-screens/android/drawable-xxhdpi/splash.png",
+        "xxxhdpi": "./assets/img/splash-screens/android/drawable-xxxhdpi/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMaps": {
+            "apiKey": "AIzaSyDNMs-LopNkw6K-2esxLBHUpXB06xIAij4"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
