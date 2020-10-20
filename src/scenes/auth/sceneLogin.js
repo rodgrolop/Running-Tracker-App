@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { View, Image, StyleSheet, Dimensions } from 'react-native'
-import { Button } from 'react-native-paper'
+import { Button, TextInput, withTheme } from 'react-native-paper'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import DefaultPage from '../../components/DefaultPage'
-import { TextInput, withTheme } from 'react-native-paper'
 import { userLogin } from '../../redux/api/user.api'
 
 const initialFormState = {
