@@ -17,7 +17,7 @@
       "bundleIdentifier": "com.madisonmk.sansilvestretracker",
       "buildNumber": "0.0.0",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Esta Aplicación necesita acceder a tu ubicación mientras está en uso y en segundo plano para poder registrar tu recorrido y el tiempo empleado, para que puedas guardar esos datos en tu perfil de corredor.",
+        "NSLocationWhenInUseUsageDescription": "Esta Aplicación necesita acceder a tu ubicación mientras está en uso y en segundo plano para poder registrar tu recorrido y el tiempo empleado, para que puedas guardar esos datos en tu perfil de corredor."
       },
       "splash": {
         "image": "./assets/img/splash-screens/ios/splash.png",
@@ -40,7 +40,7 @@
       },
       "config": {
         "googleMaps": {
-            "apiKey": "AIzaSyDNMs-LopNkw6K-2esxLBHUpXB06xIAij4"
+            "apiKey": "AIzaSyA213NwqLsr6v4mocvM6mvaF6cDu1DuIzU"
         }
       }
     },
