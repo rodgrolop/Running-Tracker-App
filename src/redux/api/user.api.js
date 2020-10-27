@@ -23,10 +23,10 @@ export const userLogin = loginData => {
       },
     })
     .then(responseJson => {
+      // TODO protect
+      // AsyncStorage.setItem('token', JSON.stringify(responseJson.data))
       store.dispatch(setUser(responseJson.data))
-      .then(()=>{        
-        RootNavigation.navigate('Home')
-      })
+      RootNavigation.navigate('Home')
     })
     .catch(error => error)
 }

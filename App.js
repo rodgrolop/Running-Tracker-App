@@ -22,7 +22,6 @@ import Navigation from './src/navigation'
 enableScreens()
 
 // Redux declarations
-// const store = configureStore()
 store.dispatch(initialiseApplication())
 
 const App = () => {
@@ -34,13 +33,8 @@ const App = () => {
       require('./assets/icon.png'),
       require('./src/image/logo.png'),
     ]),
-    // TODO check what fonts and images need to be prefetched
     Font.loadAsync({
-      // This is the font we're using for our tab bar
-      ...Icon.MaterialIcons.font,
       ...Icon.MaterialCommunityIcons.font,
-      ...Icon.FontAwesome.font,
-      ...Icon.Feather.font,
     }),
   ])
   
