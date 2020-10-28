@@ -81,6 +81,6 @@ const screenHeight = Dimensions.get('window').height
 const styles = StyleSheet.create({
     mapStyle: {
         width: screenWidth,
-        height: screenHeight / 2,
+        height: '60%',
     },
 })

@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet, Dimensions } from 'react-native'
 import { withTheme, Button } from 'react-native-paper'
 
 import { startBackgroundLocationService, stopBackgroundLocationService } from './../../redux/tasks/tracking.tasks'
 
-const HomeActions = props => {
+const TrackInfo = props => {
     
     // State
     
@@ -18,7 +18,10 @@ const HomeActions = props => {
     // Life Cycle
     
     return (
-        <>
+        <View
+            style={
+                styles.actionsContainer
+            }>
             <Button
                     loading={false}
                     icon={null} 
@@ -67,14 +70,20 @@ const HomeActions = props => {
                     >
                     Stop
                 </Button>
-        </>
+        </View>
     )
 }
 
-export default withTheme(HomeActions)
+export default withTheme(TrackInfo)
 
 // Styles
 
+const screenWidth = Dimensions.get('window').width
+const screenHeight = Dimensions.get('window').height 
+
 const styles = StyleSheet.create({
-    homeButton: {},
+    actionsContainer: {
+        width: screenWidth,
+        height: '40%',
+    },
 })

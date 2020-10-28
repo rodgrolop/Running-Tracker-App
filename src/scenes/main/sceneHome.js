@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import * as Location from 'expo-location'
 
 import { StyleSheet, Dimensions } from 'react-native'
-import { withTheme } from 'react-native-paper'
+import { withTheme, Portal, Provider } from 'react-native-paper'
 
 import { getLastKnownPosition } from './../../redux/tasks/tracking.tasks'
 import Header from './../../components/Header'
-import DefaultPage from '../../components/DefaultPage'
+import DefaultPageAuth from '../../components/DefaultPageAuth'
 import Map from '../../components/Map'
-import HomeActions from '../../components/HomeActions'
+import TrackInfo from '../../components/TrackInfo'
 
 const SceneHome = props => {
     
@@ -36,10 +36,10 @@ const SceneHome = props => {
     return (
         <>
             <Header/>
-            <DefaultPage>
+            <DefaultPageAuth>
             <Map/>
-            <HomeActions/>
-            </DefaultPage>
+            <TrackInfo/>
+            </DefaultPageAuth>
         </>
     )
 }
