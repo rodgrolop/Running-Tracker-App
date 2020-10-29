@@ -21,7 +21,7 @@ TaskManager.defineTask(TASK_FETCH_LOCATION, async ({ data: { locations }, error 
         location: location,
     }
     
-    store.dispatch(updateCoordinates(locationObj)) 
+    store.dispatch(updateTrackingState(locationObj)) 
        
 })
 

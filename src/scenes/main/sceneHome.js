@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import * as Location from 'expo-location'
 
-import { StyleSheet, Dimensions } from 'react-native'
-import { withTheme, Portal, Provider } from 'react-native-paper'
+import { withTheme } from 'react-native-paper'
 
-import { getLastKnownPosition } from './../../redux/tasks/tracking.tasks'
+import { getLastKnownPosition } from './../../redux/utils/tracking.functions'
 import Header from './../../components/Header'
 import DefaultPageAuth from '../../components/DefaultPageAuth'
 import Map from '../../components/Map'
@@ -45,12 +44,3 @@ const SceneHome = props => {
 }
 
 export default withTheme(SceneHome)
-
-// Styles
-
-const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height 
-
-const styles = StyleSheet.create({
-    
-})

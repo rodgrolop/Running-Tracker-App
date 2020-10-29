@@ -1,13 +1,13 @@
 import { SET_USER, USER_LOGOUT, LOADING } from '../actions/user.actions'
 
-const initialState = {
+export const userInitialState = {
     loading: false,
     isLoggedIn: false,
     error: '',
     user: {},
 }
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = userInitialState, action) => {
     switch (action.type) {
         case SET_USER: {
             return {

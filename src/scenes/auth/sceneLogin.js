@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
+import { userInitialState } from './../../redux/reducers/user.reducer'
+import { userLogin } from '../../redux/api/user.api'
+
 import { View, Image, StyleSheet, Dimensions } from 'react-native'
 import { Button, TextInput, withTheme } from 'react-native-paper'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
+
 import DefaultPage from '../../components/DefaultPage'
-import { userLogin } from '../../redux/api/user.api'
 
 const initialFormState = {
     username: 'Test',
@@ -13,9 +17,6 @@ const initialFormState = {
 
 const SceneLogin = ( 
         {   
-            loading,
-            isLoggedIn,
-            error,
             user,
             ...props
         }
@@ -113,7 +114,7 @@ const SceneLogin = (
                     secureTextEntry={secureTextEntry}
                     />                
                 <Button
-                    loading={loading}
+                    loading={user.loading}
                     icon={
                         isLoggedIn ?  
                         "lock-open" : 
@@ -146,24 +147,15 @@ const SceneLogin = (
 }
 
 SceneLogin.defaultProps = {
-    loading: false,
-    isLoggedIn: false,
-    error: '',
-    user: {},
+    user: userInitialState,
 }
 
 SceneLogin.propTypes = {
-    loading: PropTypes.bool.isRequired,
-    isLoggedIn: PropTypes.bool.isRequired,
-    error: PropTypes.string.isRequired,
     user: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    loading: state.user.loading,
-    isLoggedIn: state.user.isLoggedIn,
-    error: state.user.error,
-    user: state.user.user,    
+    user: state.user,    
 })
 
 export default withTheme(connect(mapStateToProps)(SceneLogin))

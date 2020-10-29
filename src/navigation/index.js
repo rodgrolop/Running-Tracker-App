@@ -33,10 +33,14 @@ const Navigation = (
                 component={MainDrawer} 
                 options={{ headerShown: false }} />
             ) : (            
+            // <Stack.Screen 
+            //     name='Login' 
+            //     component={SceneLogin} 
+            //     options={{ headerShown: false }}/>
             <Stack.Screen 
-                name='Login' 
-                component={SceneLogin} 
-                options={{ headerShown: false }}/>            
+                name='Home' 
+                component={MainDrawer} 
+                options={{ headerShown: false }} />         
             ) 
         }           
         </Stack.Navigator>

@@ -1,6 +1,6 @@
-import { SET_START_POSITION, UPDATE_REGION, UPDATE_COORDINATES } from '../actions/tracking.actions'
+import { SET_START_POSITION, UPDATE_REGION, UPDATE_TRACKING_STATE } from '../actions/tracking.actions'
 
-const initialState = {
+export const trackingInitialState = {
     region: {
         latitude: 41.6526595,
         longitude: -4.7234255,
@@ -14,9 +14,18 @@ const initialState = {
         }
     },
     routeCoordinates: [],
+    filteredRouteCoordinates: [],
+    runAltitudes: [],
+    runSpeeds: [],
+    runStartingTimes: [],
+    runStatus: 'stopped',
+    currentRunInstantSpeed: 0,
+    currentRunTimeSpent: 0,
+    currentRunDistance: 0,
+    lastRun: {},    
 }
 
-const trackingReducer = (state = initialState, action) => {
+const trackingReducer = (state = trackingInitialState, action) => {
     switch (action.type) {
         case SET_START_POSITION: {
             return {
@@ -31,7 +40,7 @@ const trackingReducer = (state = initialState, action) => {
                 region: action.payload,
             }
         }
-        case UPDATE_COORDINATES: {
+        case UPDATE_TRACKING_STATE: {
             return {
                 ...state,
                 region: { ...state.region, ...action.payload.location.coords },

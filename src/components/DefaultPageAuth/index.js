@@ -8,9 +8,7 @@ const DefaultPageAuth = ({ children }) => (
         <ScrollView contentContainerStyle={styles.scroller}>
             {children}
         </ScrollView>
-        <View style={styles.containerAbsolute}>
-            <FabButton/>
-        </View>
+        <FabButton/>
     </View>
 )
 
@@ -20,14 +18,9 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
         flex: 1,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
         backgroundColor: '#fff',
-    },
-    containerAbsolute: {
-        position: 'absolute',
-        right: 0,
-        bottom: 0,
     },
     scroller: {
         flexGrow: 1,

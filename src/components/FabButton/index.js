@@ -1,19 +1,49 @@
 import React, { useState } from 'react'
 
+import { FloatingAction } from 'react-native-floating-action'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
 import { StyleSheet } from 'react-native'
 import { withTheme, FAB, Portal } from 'react-native-paper'
 
-import { startBackgroundLocationService, stopBackgroundLocationService } from './../../redux/tasks/tracking.tasks'
+import { startBackgroundLocationService, stopBackgroundLocationService } from './../../redux/utils/tracking.functions'
 
 const FabButton = props => {
     
     const { colors } = props.theme
     
+    const actions = [
+  {
+    text: 'Accessibility',
+    icon: <Icon name='speedometer' size={40} color={colors.primary} />,
+    name: 'bt_accessibility',
+    position: 2
+  },
+  {
+    text: 'Language',
+    icon: <Icon name='speedometer' size={40} color={colors.primary} />,
+    name: 'bt_language',
+    position: 1
+  },
+  {
+    text: 'Location',
+    icon: <Icon name='speedometer' size={40} color={colors.primary} />,
+    name: 'bt_room',
+    position: 3
+  },
+  {
+    text: 'Video',
+    icon: <Icon name='speedometer' size={40} color={colors.primary} />,
+    name: 'bt_videocam',
+    position: 4
+  }
+]
+    
     // State
     const [state, setState] = useState({ open: false })
+    
     // Functions
-    const onStateChange = ({ open }) => setState({ open })
-    const { open } = state
+    
     // Map View region handling
     
     // Location service
@@ -21,38 +51,19 @@ const FabButton = props => {
     // Life Cycle
     
     return (
-            <Portal>
-                <FAB.Group
-                    open={open}
-                    icon={open ? 'calendar-today' : 'plus'}
-                    color={colors.surface}
-                    fabStyle={styles.fabStyle}
-                    actions={[
-                      { icon: 'plus', onPress: () => console.log('Pressed add') },
-                      {
-                        icon: 'star',
-                        label: 'Star',
-                        onPress: () => console.log('Pressed star'),
-                      },
-                      {
-                        icon: 'email',
-                        label: 'Email',
-                        onPress: () => console.log('Pressed email'),
-                      },
-                      {
-                        icon: 'bell',
-                        label: 'Remind',
-                        onPress: () => console.log('Pressed notifications'),
-                      },
-                    ]}
-                    onStateChange={onStateChange}
-                    onPress={() => {
-                      if (open) {
-                        // do something if the speed dial is open
-                      }
-                    }}
-                />
-            </Portal>
+        <FloatingAction
+            actions={actions}
+            distanceToEdge={15}
+            floatingIcon={<Icon name='play' size={30} color={colors.surface} />}
+            onPressItem={
+                name => {
+                    console.log(`selected button: ${name}`)
+                }
+            }
+            color={colors.primary}
+            overlayColor={colors.transparent}
+            position='center'
+        />
     )
 }
 
@@ -62,6 +73,9 @@ export default withTheme(FabButton)
 
 const styles = StyleSheet.create({
     fabStyle: {
+        backgroundColor: '#63257F',
+    },
+    secondaryIcon: {
         backgroundColor: '#63257F',
     },
 })
