@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { Appbar } from 'react-native-paper'
+import { withTheme, Appbar } from 'react-native-paper'
 import { Image, StyleSheet, Dimensions } from 'react-native'
 
 const Header = () => {
@@ -23,10 +23,11 @@ const Header = () => {
     )
 }
 
-export default Header
+export default withTheme(Header)
 
 const styles = StyleSheet.create({
     appBar: {
+        backgroundColor: '#63257F',
         shadowColor: '#000',
         shadowOffset: {
         	width: 0,

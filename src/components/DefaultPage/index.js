@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, ScrollView, View, Dimensions } from 'react-native'
-import FabButton from '../FabButton'
 
 const DefaultPage = ({ children }) => (
     <View style={styles.container}>

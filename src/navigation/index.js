@@ -33,25 +33,21 @@ const Navigation = (
                 component={MainDrawer} 
                 options={{ headerShown: false }} />
             ) : (            
-            // <Stack.Screen 
-            //     name='Login' 
-            //     component={SceneLogin} 
-            //     options={{ headerShown: false }}/>
             <Stack.Screen 
-                name='Home' 
-                component={MainDrawer} 
-                options={{ headerShown: false }} />         
+                name='Login' 
+                component={SceneLogin} 
+                options={{ headerShown: false }}/>      
             ) 
         }           
         </Stack.Navigator>
     </NavigationContainer>
 )
 
-SceneLogin.defaultProps = {
+Navigation.defaultProps = {
     isLoggedIn: false,
 }
 
-SceneLogin.propTypes = {
+Navigation.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
 }
 

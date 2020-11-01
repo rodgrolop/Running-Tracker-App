@@ -36,7 +36,7 @@ const TrackInfo = (
             style={
                 styles.actionsContainer
             }>
-                <View style={styles.actionsItem}>
+                <View style={styles.actionsItemLeft}>
                     <Icon 
                         name='speedometer'
                         size={28} 
@@ -45,13 +45,13 @@ const TrackInfo = (
                         {tracking.currentRunInstantSpeed}
                     </Headline>
                 </View>
-                <View style={styles.actionsItem}>
+                <View style={styles.actionsItemMid}>
                      <Icon 
                         name='timer' 
                         size={46} 
                         color={colors.primary} />
                 </View>
-                <View style={styles.actionsItem}>
+                <View style={styles.actionsItemRight}>
                     <Icon 
                         name='arrow-left-right' 
                         size={28} 
@@ -115,7 +115,19 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 10,
         borderTopLeftRadius: 10,
     },
-    actionsItem: {
+    actionsItemLeft: {
+        width: '33%',
+        height: '40%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    actionsItemMid: {
+        width: '33%',
+        height: '40%',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    },
+    actionsItemRight: {
         width: '33%',
         height: '40%',
         alignItems: 'center',
