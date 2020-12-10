@@ -1,46 +1,26 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import { FloatingAction } from 'react-native-floating-action'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { StyleSheet } from 'react-native'
-import { withTheme, FAB, Portal } from 'react-native-paper'
+import { StyleSheet, View, Dimensions } from 'react-native'
+import { withTheme, FAB } from 'react-native-paper'
 
-import { startBackgroundLocationService, stopBackgroundLocationService } from './../../redux/utils/tracking.functions'
+import { trackingInitialState } from './../../redux/reducers/tracking.reducer'
 
-const FabButton = props => {
+import { startBackgroundLocationService, pauseBackgroundLocationService, stopBackgroundLocationService } from './../../redux/utils/tracking.functions'
+
+const FabButton = ( 
+  {   
+      tracking,
+      ...props
+  }
+  ) => {
     
     const { colors } = props.theme
     
-    const actions = [
-  {
-    text: 'Accessibility',
-    icon: <Icon name='speedometer' size={40} color={colors.primary} />,
-    name: 'bt_accessibility',
-    position: 2
-  },
-  {
-    text: 'Language',
-    icon: <Icon name='speedometer' size={40} color={colors.primary} />,
-    name: 'bt_language',
-    position: 1
-  },
-  {
-    text: 'Location',
-    icon: <Icon name='speedometer' size={40} color={colors.primary} />,
-    name: 'bt_room',
-    position: 3
-  },
-  {
-    text: 'Video',
-    icon: <Icon name='speedometer' size={40} color={colors.primary} />,
-    name: 'bt_videocam',
-    position: 4
-  }
-]
-    
     // State
-    const [state, setState] = useState({ open: false })
     
     // Functions
     
@@ -51,31 +31,71 @@ const FabButton = props => {
     // Life Cycle
     
     return (
-        <FloatingAction
-            actions={actions}
-            distanceToEdge={15}
-            floatingIcon={<Icon name='play' size={30} color={colors.surface} />}
-            onPressItem={
-                name => {
-                    console.log(`selected button: ${name}`)
+        <View style={styles.fabContainer}>
+            <FAB
+                style={styles.fabStyle}
+                fabStyle={styles.fabStyleParent}
+                animated={true}
+                icon={
+                  tracking.runStatus != 'started' ? 
+                  'play' : 
+                  'pause'
                 }
-            }
-            color={colors.primary}
-            overlayColor={colors.transparent}
-            position='center'
-        />
+                onPress={
+                  () => tracking.runStatus != 'started' ? 
+                  startBackgroundLocationService() : 
+                  pauseBackgroundLocationService()
+                }
+              />
+              { tracking.runStatus != 'stopped' && 
+                  <FAB
+                      style={styles.fabStyle}
+                      fabStyle={styles.fabStyleParent}
+                      animated={true}
+                      icon='stop'
+                      onPress={
+                        () =>
+                        stopBackgroundLocationService()
+                      }
+                    />
+              }          
+          </View>
     )
 }
 
-export default withTheme(FabButton)
+FabButton.defaultProps = {
+  tracking: trackingInitialState,
+}
+
+FabButton.propTypes = {
+  tracking: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = state => ({
+  tracking: state.tracking,
+})
+
+const mapDispatchToProps = dispatch => ({})
+
+export default withTheme(connect(mapStateToProps, mapDispatchToProps)(FabButton))
 
 // Styles
 
 const styles = StyleSheet.create({
+    fabContainer: {
+        width: Dimensions.get('window').width,
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        position: 'absolute',
+        bottom: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     fabStyle: {
-        backgroundColor: '#63257F',
+        margin: 16,        
     },
-    secondaryIcon: {
+    fabStyleParent: {
         backgroundColor: '#63257F',
-    },
+    },    
 })

@@ -6,7 +6,7 @@ import store from '../store'
 import * as RootNavigation from '../../navigation/RootNavigation'
 
 // TODO urls in config file
-const apiHost = 'https://pucelarun.es/wp-json/jwt-auth/v1/token'
+const apiHost = 'https://www.sansilvestrevalladolid.es/wp-json/jwt-auth/v1/token'
 
 export const userLogin = loginData => {
     
@@ -28,5 +28,6 @@ export const userLogin = loginData => {
       store.dispatch(setUser(responseJson.data))
       RootNavigation.navigate('Home')
     })
-    .catch(error => error)
+    .catch(error => 
+      console.log(error))
 }

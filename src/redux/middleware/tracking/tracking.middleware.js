@@ -6,7 +6,9 @@ const trackingMiddleware = store => next => action => {
     next(action)
   }
   
-  return next(action)
+  else {
+    next(action)
+  }
   
 }
 

@@ -41,7 +41,6 @@ const Map = (
                 mapPadding={{
                     bottom: 30,
                 }}
-                style={styles.mapStyle}
                 showsUserLocation={true}
                 style={styles.mapStyle}
                 customMapStyle={mapStyle}
@@ -49,6 +48,11 @@ const Map = (
                 <Polyline
 	             	coordinates={tracking.routeCoordinates}
 	             	strokeColor='#63257F' // fallback for when `strokeColors` is not supported by the map-provider
+	             	strokeWidth={6}
+	            />
+                <Polyline
+	             	coordinates={tracking.filteredRouteCoordinates}
+	             	strokeColor='#000000' // fallback for when `strokeColors` is not supported by the map-provider
 	             	strokeWidth={6}
 	            />
             </MapView>
@@ -80,7 +84,7 @@ const screenHeight = Dimensions.get('window').height
 const styles = StyleSheet.create({
     mapContainerStyle: {
         width: screenWidth,
-        height: '55%',
+        height: '65%',
         backgroundColor: '#FFF',
         zIndex: 0,
     },

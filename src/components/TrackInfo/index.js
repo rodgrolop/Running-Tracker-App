@@ -8,9 +8,7 @@ import TimeFormat from 'hh-mm-ss'
 
 import { View, StyleSheet, Dimensions } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import { withTheme, Button, Headline } from 'react-native-paper'
-
-import { startBackgroundLocationService, stopBackgroundLocationService } from './../../redux/utils/tracking.functions'
+import { withTheme, Headline } from 'react-native-paper'
 
 const TrackInfo = ( 
     {   
@@ -22,7 +20,7 @@ const TrackInfo = (
     const { colors } = props.theme
     
     // State
-    
+    console.log(tracking)
     // Functions
     
     // Map View region handling
@@ -88,12 +86,11 @@ export default withTheme(connect(mapStateToProps, mapDispatchToProps)(TrackInfo)
 // Styles
 
 const screenWidth = Dimensions.get('window').width
-const screenHeight = Dimensions.get('window').height 
 
 const styles = StyleSheet.create({
     actionsContainer: {
         width: screenWidth,
-        height: '45%',
+        height: '35%',
         paddingVertical: 20,
         paddingBottom: 60,
         marginTop: -10,
@@ -137,7 +134,7 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '60%',
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
     },
     actionsText: {   
         fontSize: 32,

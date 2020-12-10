@@ -3,7 +3,7 @@ import * as Location from 'expo-location'
 
 import { withTheme } from 'react-native-paper'
 
-import { getLastKnownPosition } from './../../redux/utils/tracking.functions'
+// import { getLastKnownPosition } from './../../redux/utils/tracking.functions'
 import Header from './../../components/Header'
 import DefaultPageAuth from '../../components/DefaultPageAuth'
 import Map from '../../components/Map'
@@ -18,9 +18,9 @@ const SceneHome = props => {
     // Permissions
     const checkPermissions = async () => {
         let { status } = await Location.requestPermissionsAsync()
-        if (status === 'granted') {
-            getLastKnownPosition()
-        }
+        // if (status === 'granted') {
+        //     getLastKnownPosition()
+        // }
     }
     
     // Map View region handling

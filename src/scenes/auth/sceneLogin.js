@@ -116,7 +116,7 @@ const SceneLogin = (
                 <Button
                     loading={user.loading}
                     icon={
-                        isLoggedIn ?  
+                        user.isLoggedIn ?  
                         "lock-open" : 
                         "lock"
                     } 
