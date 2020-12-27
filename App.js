@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
-import { AppLoading } from 'expo'
+import React, { useState, useEffect } from 'react'
+import AppLoading from 'expo-app-loading'
 import { StatusBar } from 'expo-status-bar'
 import { enableScreens } from 'react-native-screens'
 import { Provider as PaperProvider } from 'react-native-paper'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import AsyncStorage from '@react-native-community/async-storage'
 import theme from './src/theme'
 
 // Redux imports
 import { Provider } from 'react-redux'
+import { setUser } from './src/redux/actions/user.actions'
 import store from './src/redux/store'
 import { initialiseApplication } from './src/redux/actions/application.actions'
 
@@ -28,7 +30,8 @@ const App = () => {
   
   const [isReady, setReady] = useState(false)
   
-  const loadAssetsAsync = async () => Promise.all([
+  const loadAssetsAsync = async () =>     
+    Promise.all([
     Asset.loadAsync([
       require('./assets/icon.png'),
       require('./src/image/logo.png'),
@@ -37,6 +40,14 @@ const App = () => {
       ...Icon.MaterialCommunityIcons.font,
     }),
   ])
+  
+  useEffect(() => {
+    async function checkUser() {
+      const response = await AsyncStorage.getItem('user')
+      response && store.dispatch(setUser(JSON.parse(response)))
+    }
+    checkUser()
+  }, [])
   
   return isReady ? 
     (

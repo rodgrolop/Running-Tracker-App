@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -20,14 +20,23 @@ const TrackInfo = (
     const { colors } = props.theme
     
     // State
-    console.log(tracking)
+    const [timer, setTimer] = useState(0)
+    
     // Functions
+    const startTimer = () => {
+        setInterval(function(){ 
+            setTimer(timer => timer + 1000)
+        }, 1000)
+    }
     
     // Map View region handling
     
     // Location service
     
     // Life Cycle
+    useEffect(() => {
+        // startTimer()
+    }, [])
     
     return (
         <View 
@@ -40,7 +49,7 @@ const TrackInfo = (
                         size={28} 
                         color={colors.primary} />
                     <Headline style={styles.actionsText}>
-                        {tracking.currentRunInstantSpeed}
+                        {parseFloat(tracking.currentRunInstantSpeed).toFixed(1)}
                     </Headline>
                 </View>
                 <View style={styles.actionsItemMid}>
@@ -55,12 +64,13 @@ const TrackInfo = (
                         size={28} 
                         color={colors.primary} />
                     <Headline style={styles.actionsText}>
-                        {tracking.currentRunDistance}
+                        { parseFloat(tracking.currentRunDistance).toFixed(0) } m
                     </Headline>
                 </View>
                 <View style={styles.actionsItemFull}>
                     <Headline style={styles.actionsTextTime} color={colors.text}>
                         {TimeFormat.fromMs(tracking.currentRunTimeSpent, 'hh:mm:ss')}
+                        {/* {TimeFormat.fromMs(timer, 'hh:mm:ss')} */}
                     </Headline>
                 </View>
         </View>

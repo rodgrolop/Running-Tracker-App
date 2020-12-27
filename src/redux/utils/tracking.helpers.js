@@ -7,7 +7,7 @@ export const calcDistance = (lastLocation, currentlocation) => {
     
     if (lastLocation && currentlocation){
         
-        return haversine(lastLocation.coords, currentlocation.coords)
+        return (haversine(lastLocation.coords, currentlocation.coords, {unit: 'meter'}) || 0)
         
     } else {
         

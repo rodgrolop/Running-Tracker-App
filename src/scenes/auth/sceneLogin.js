@@ -11,8 +11,8 @@ import { Button, TextInput, withTheme } from 'react-native-paper'
 import DefaultPage from '../../components/DefaultPage'
 
 const initialFormState = {
-    username: 'Test',
-    password: '6665388',
+    username: '',
+    password: '',
 }
 
 const SceneLogin = ( 

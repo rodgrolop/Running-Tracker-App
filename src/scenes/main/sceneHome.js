@@ -16,21 +16,12 @@ const SceneHome = props => {
     // Functions
     
     // Permissions
-    const checkPermissions = async () => {
-        let { status } = await Location.requestPermissionsAsync()
-        // if (status === 'granted') {
-        //     getLastKnownPosition()
-        // }
-    }
     
     // Map View region handling
     
     // Location service
     
     // Life Cycle
-    useEffect(() => {
-        checkPermissions()
-    }, [])
     
     return (
         <>

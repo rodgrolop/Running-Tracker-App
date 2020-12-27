@@ -2,6 +2,7 @@ import axios from 'axios'
 
 import { setUser, setLoading } from '../actions/user.actions'
 import store from '../store'
+import AsyncStorage from '@react-native-community/async-storage'
 
 import * as RootNavigation from '../../navigation/RootNavigation'
 
@@ -23,8 +24,7 @@ export const userLogin = loginData => {
       },
     })
     .then(responseJson => {
-      // TODO protect
-      // AsyncStorage.setItem('token', JSON.stringify(responseJson.data))
+      AsyncStorage.setItem('user', JSON.stringify(responseJson.data))
       store.dispatch(setUser(responseJson.data))
       RootNavigation.navigate('Home')
     })

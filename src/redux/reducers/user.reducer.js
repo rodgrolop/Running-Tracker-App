@@ -1,10 +1,12 @@
 import { SET_USER, USER_LOGOUT, LOADING } from '../actions/user.actions'
+import { distance } from './../utils/helperFunctions';
 
 export const userInitialState = {
     loading: false,
     isLoggedIn: false,
     error: '',
-    user: {},
+    user: {},    
+    distance: null,
 }
 
 const userReducer = (state = userInitialState, action) => {
@@ -15,11 +17,12 @@ const userReducer = (state = userInitialState, action) => {
                 isLoggedIn: true,
                 loading: false,
                 user: action.payload,
+                distance: distance(action.payload.data.fec_nac)
             }
         }
         case USER_LOGOUT: {
             return {
-                ...initialState
+                ...state
             }
         }
         case LOADING: {

@@ -16,6 +16,7 @@ const Drawer = createDrawerNavigator()
 const MainDrawer = () =>
     <Drawer.Navigator drawerContent={() => <DrawerContent />}>
         <Drawer.Screen name='Home' component={SceneHome} />
+        <Drawer.Screen name='Login' component={SceneLogin} />
     </Drawer.Navigator>
 
 

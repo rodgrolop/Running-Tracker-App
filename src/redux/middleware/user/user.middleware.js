@@ -1,4 +1,5 @@
 import { SET_USER, LOADING, USER_LOGOUT } from '../../actions/user.actions'
+import * as RootNavigation from '../../../navigation/RootNavigation'
 
 const userMiddleware = () => next => action => {  
   
@@ -11,6 +12,7 @@ const userMiddleware = () => next => action => {
   }
   
   if (action.type === USER_LOGOUT) {
+    RootNavigation.navigate('Login')
     next(action)
   }
   
