@@ -1,23 +1,53 @@
 {
   "expo": {
-    "name": "run-track-app",
-    "slug": "run-track-app",
-    "version": "1.0.0",
+    "name": "San Silvestre Valladolid Tracker",
+    "slug": "sansilvestretracker",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
-      "**/*"
+      "./assets*",
+      "./src/image/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.madisonmk.sansilvestretracker",
+      "buildNumber": "2.0.0",
+      "infoPlist": {        
+        "UIBackgroundModes": ["location"],
+        "NSLocationWhenInUseUsageDescription": "San Silvestre Valladolid Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "San Silvestre Valladolid Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando",
+        "NSLocationAlwaysUsageDescription": "San Silvestre Valladolid Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando"
+      },
+      "splash": {
+        "image": "./assets/img/splash-screens/ios/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "android": {
+      "package": "com.madisonmk.sansilvestretracker",
+      "useNextNotificationsApi": true,
+      "versionCode": 2,      
+      "permissions" : ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "FOREGROUND_SERVICE"],
+      "splash": {
+        "ldpi": "./assets/img/splash-screens/android/drawable-ldpi/splash.png",
+        "mdpi": "./assets/img/splash-screens/android/drawable-mdpi/splash.png",
+        "hdpi": "./assets/img/splash-screens/android/drawable-hdpi/splash.png",
+        "xhdpi": "./assets/img/splash-screens/android/drawable-xhdpi/splash.png",
+        "xxhdpi": "./assets/img/splash-screens/android/drawable-xxhdpi/splash.png",
+        "xxxhdpi": "./assets/img/splash-screens/android/drawable-xxxhdpi/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#ffffff"
+      },
+      "config": {
+        "googleMaps": {
+            "apiKey": "AIzaSyA213NwqLsr6v4mocvM6mvaF6cDu1DuIzU"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
