@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
-import { LOCATION, usePermissions } from 'expo-permissions'
+import * as Permissions from 'expo-permissions'
 import * as Linking from 'expo-linking'
 
 import { ActivityIndicator, StyleSheet, View, Dimensions, Alert } from 'react-native'
@@ -31,7 +31,6 @@ const FabButton = (
     const [visibleBackGround, setVisibleBackGround] = useState(false)
     const [error, setError] = useState(false)
     const [dialogText, setDialogText] = useState('')
-    const [permission, askPermissionHook] = usePermissions(LOCATION)
     
     // Functions
     const showDialog = () => setVisible(true)
@@ -63,8 +62,9 @@ const FabButton = (
       }  
     }
     
-    const checkPermissions = () => {
-      if (!permission) {
+    const checkPermissions = async () => {
+        let { status } = await Permissions.getAsync(Permissions.LOCATION)
+        if (status !== 'granted') {
           showDialogBackGround()
       } else {
           startBackgroundLocationService()

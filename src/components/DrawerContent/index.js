@@ -1,5 +1,4 @@
 import React from 'react'
-import Constants from 'expo-constants'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import * as Linking from 'expo-linking'
 import { connect } from 'react-redux'
@@ -9,7 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { userLogout } from '../../redux/actions/user.actions'
 import store from '../../redux/store'
 
-import { Drawer, Button } from 'react-native-paper'
+import { Button } from 'react-native-paper'
 
 
 const DrawerContent = (
@@ -97,8 +96,7 @@ return (
         <Button onPress={handleLogout} style={stylesSidebar.logoutButton}>Desconectar</Button>
       </View>
       <View style={stylesSidebar.version}>
-        {/* <Text style={stylesSidebar.versionText}>ver:{Constants.nativeAppVersion}</Text> */}
-        <Text style={stylesSidebar.versionText}>ver:0.0.11</Text>
+        <Text style={stylesSidebar.versionText}>0.0.37</Text>
       </View>
     </View>
   </SafeAreaView>

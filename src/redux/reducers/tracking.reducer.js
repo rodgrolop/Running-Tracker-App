@@ -1,4 +1,5 @@
-import { SET_START_POSITION, START_TRACKING, CONTINUE_TRACKING, STOP_TRACKING, UPDATE_REGION, UPDATE_TRACKING_STATE, TRACKING_HAS_ENDED, NOTIFIED } from '../actions/tracking.actions'
+import { SET_START_POSITION, START_TRACKING, CONTINUE_TRACKING, STOP_TRACKING, UPDATE_REGION, UPDATE_TRACKING_STATE, TRACKING_HAS_ENDED, NOTIFIED, GET_UPDATED } from '../actions/tracking.actions'
+import pick from 'lodash/pick'
 
 export const trackingInitialState = {
     region: {
@@ -48,11 +49,12 @@ const trackingReducer = (state = trackingInitialState, action) => {
         case START_TRACKING: {
             return {
                 ...state,
-                routeCoordinates: [],
-                filteredRouteCoordinates: [],
+                routeCoordinates: [pick(action.payload.coords, ['latitude', 'longitude'])],
+                filteredRouteCoordinates: [pick(action.payload.coords, ['latitude', 'longitude'])],
                 currentRunTimeSpent: 0,
                 currentRunDistance: 0,
-                runStartingTime: action.payload,
+                currentRunInstantSpeed: 0,
+                runStartingTime: action.payload.timestamp,
                 runStatus: 'started',
                 lastTimeStamp: 0,
                 ended: false,
@@ -68,7 +70,6 @@ const trackingReducer = (state = trackingInitialState, action) => {
         case STOP_TRACKING: {
             return {
                 ...state,
-                runStartingTime: null,
                 runStatus: 'stopped',
             }
         }
@@ -105,6 +106,11 @@ const trackingReducer = (state = trackingInitialState, action) => {
                 ...state,
                 ended: true,
                 endNotified: true,
+            }
+        }
+        case GET_UPDATED: {
+            return {
+                ...state,
             }
         }
         default: {

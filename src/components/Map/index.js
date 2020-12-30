@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { LOCATION, usePermissions } from 'expo-permissions'
+import Permissions, {LOCATION} from 'expo-permissions'
 
 import { trackingInitialState } from './../../redux/reducers/tracking.reducer'
 
@@ -26,7 +26,6 @@ const Map = (
     const [visible, setVisible] = useState(false)
     const [visibleService, setVisibleService] = useState(false)
     const [mapVisible, setMapVisible] = useState(false)
-    const [permission, askPermissionHook] = usePermissions(LOCATION)
     
     // Functions
     const showDialog = () => setVisible(true)
@@ -42,10 +41,10 @@ const Map = (
         enabled ? checkPermissions() : showDialogService()
     }
     
-    const askPermission = () => {
+    const askPermission = async () => {
         hideDialog()
-        askPermissionHook()
-        if (!permission) {
+        let { status } = await Location.requestPermissionsAsync()        
+        if (status !== 'granted') {
             showDialog()
         } else {
             setMapVisible(true)
@@ -60,7 +59,6 @@ const Map = (
     // Permissions
     const checkPermissions = async () => {
         hideDialogService()
-        // let { status } = await Permissions.getAsync(Permissions.LOCATION)
         let { status } = await Location.getPermissionsAsync()
         if (status !== 'granted') {
             showDialog()

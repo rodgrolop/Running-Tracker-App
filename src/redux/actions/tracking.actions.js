@@ -5,6 +5,7 @@ export const STOP_TRACKING = 'STOP_TRACKING'
 export const UPDATE_TRACKING_STATE = 'UPDATE_COORDINATES'
 export const TRACKING_HAS_ENDED = 'TRACKING_HAS_ENDED'
 export const NOTIFIED = 'NOTIFIED'
+export const GET_UPDATED = 'GET_UPDATED'
 
 export const setStartPosition = location => ({
     type: SET_START_POSITION,
@@ -38,5 +39,10 @@ export const trackingHasEnded = () => ({
 
 export const notified = () => ({
     type: NOTIFIED,
+    payload: null,
+})
+
+export const getUpdated = () => ({
+    type: GET_UPDATED,
     payload: null,
 })
