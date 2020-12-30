@@ -2,7 +2,7 @@
   "expo": {
     "name": "San Silvestre Valladolid Tracker",
     "slug": "sansilvestretracker",
-    "version": "3.0.0",
+    "version": "4.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "updates": {
@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.madisonmk.sansilvestretracker",
-      "buildNumber": "3.0.0",
+      "buildNumber": "4.0.0",
       "infoPlist": {        
         "UIBackgroundModes": ["location"],
         "NSLocationWhenInUseUsageDescription": "San Silvestre Valladolid Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando",
@@ -30,7 +30,7 @@
     },
     "android": {
       "package": "com.madisonmk.sansilvestretracker",
-      "versionCode": 3,      
+      "versionCode": 4,      
       "permissions" : ["LOCATION", "ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "FOREGROUND_SERVICE"],
       "splash": {
         "ldpi": "./assets/img/splash-screens/android/drawable-ldpi/splash.png",

@@ -96,7 +96,7 @@ return (
         <Button onPress={handleLogout} style={stylesSidebar.logoutButton}>Desconectar</Button>
       </View>
       <View style={stylesSidebar.version}>
-        <Text style={stylesSidebar.versionText}>0.0.37</Text>
+        <Text style={stylesSidebar.versionText}>0.0.40</Text>
       </View>
     </View>
   </SafeAreaView>

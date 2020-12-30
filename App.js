@@ -9,7 +9,7 @@ import theme from './src/theme'
 
 // Redux imports
 import { Provider } from 'react-redux'
-import { setUser } from './src/redux/actions/user.actions'
+import { setUser, updateDistance } from './src/redux/actions/user.actions'
 import store from './src/redux/store'
 import { initialiseApplication } from './src/redux/actions/application.actions'
 
@@ -45,6 +45,8 @@ const App = () => {
     async function checkUser() {
       const response = await AsyncStorage.getItem('user')
       response && store.dispatch(setUser(JSON.parse(response)))
+      let fecNac = JSON.parse(response).data.fec_nac
+      fecNac && store.dispatch(updateDistance(fecNac))
     }
     checkUser()
   }, [])
