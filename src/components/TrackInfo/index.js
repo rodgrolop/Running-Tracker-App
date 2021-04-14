@@ -2,17 +2,18 @@ import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import { trackingInitialState } from './../../redux/reducers/tracking.reducer'
-
 import TimeFormat from 'hh-mm-ss'
 
-import { View, StyleSheet, Dimensions } from 'react-native'
+import { AppState, View, StyleSheet, Dimensions } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { withTheme, Headline } from 'react-native-paper'
+import { getUpdated } from './../../redux/actions/tracking.actions'
 
 const TrackInfo = ( 
     {   
         tracking,
+        runStatus,
+        currentRunTimeSpent,
         ...props
     }
     ) => {
@@ -20,13 +21,15 @@ const TrackInfo = (
     const { colors } = props.theme
     
     // State
-    const [timer, setTimer] = useState(0)
+    const appState = useRef(AppState.currentState)
+    const [timer, setTimer] = useState(currentRunTimeSpent)
     
     // Functions
-    const startTimer = () => {
-        setInterval(function(){ 
-            setTimer(timer => timer + 1000)
-        }, 1000)
+    const handleAppStateChange = nextAppState => {
+        if (appState.current.match(/inactive|background/) && nextAppState === "active") {
+            getUpdated()
+        }
+        appState.current = nextAppState;
     }
     
     // Map View region handling
@@ -35,7 +38,26 @@ const TrackInfo = (
     
     // Life Cycle
     useEffect(() => {
-        // startTimer()
+        let interval = null        
+        if (runStatus == 'started') {  
+            setTimer(currentRunTimeSpent)          
+            interval = setInterval(() => {
+                setTimer(timer => timer + 1000)
+            }, 1000);
+        } else {
+            clearInterval(interval)
+            setTimer(currentRunTimeSpent)
+        }
+        return () => clearInterval(interval)
+    }, [runStatus])
+    
+    useEffect(() => {
+        setTimer(currentRunTimeSpent)
+    }, [currentRunTimeSpent])
+    
+    useEffect(() => {
+        AppState.addEventListener("change", handleAppStateChange)
+        return () => AppState.removeEventListener("change", handleAppStateChange)
     }, [])
     
     return (
@@ -69,24 +91,23 @@ const TrackInfo = (
                 </View>
                 <View style={styles.actionsItemFull}>
                     <Headline style={styles.actionsTextTime} color={colors.text}>
-                        {TimeFormat.fromMs(tracking.currentRunTimeSpent, 'hh:mm:ss')}
-                        {/* {TimeFormat.fromMs(timer, 'hh:mm:ss')} */}
+                        {TimeFormat.fromMs(timer, 'hh:mm:ss')}
                     </Headline>
                 </View>
         </View>
     )
 }
 
-TrackInfo.defaultProps = {
-    tracking: trackingInitialState,
-}
-
 TrackInfo.propTypes = {
     tracking: PropTypes.object.isRequired,
+    runStatus: PropTypes.string.isRequired,
+    currentRunTimeSpent: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = state => ({
     tracking: state.tracking,
+    runStatus: state.tracking.runStatus,
+    currentRunTimeSpent: state.tracking.currentRunTimeSpent,
 })
 
 const mapDispatchToProps = dispatch => ({})
