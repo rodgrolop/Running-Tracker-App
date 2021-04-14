@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "San Silvestre Valladolid Tracker",
-    "slug": "sansilvestretracker",
-    "version": "4.0.0",
+    "name": "Pucela Run 2021 Tracker",
+    "slug": "pucelarun2021tracker",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "updates": {
@@ -14,13 +14,13 @@
     ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.madisonmk.sansilvestretracker",
-      "buildNumber": "4.0.0",
+      "bundleIdentifier": "com.madisonmk.pucelarun2021tracker",
+      "buildNumber": "1.0.0",
       "infoPlist": {        
         "UIBackgroundModes": ["location"],
-        "NSLocationWhenInUseUsageDescription": "San Silvestre Valladolid Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "San Silvestre Valladolid Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando",
-        "NSLocationAlwaysUsageDescription": "San Silvestre Valladolid Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando"
+        "NSLocationWhenInUseUsageDescription": "Pucela Run 2021 Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Pucela Run 2021 Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando",
+        "NSLocationAlwaysUsageDescription": "Pucela Run 2021 Tracker recoge datos de ubicación para habilitar la función de registrar tu recorrido de la carrera, la velocidad media y el tiempo empleado, para que puedas enviar esos datos a tu perfil de corredor en la web www.sansilvestrevalladolid.es,  aunque la aplicación esté cerrada o no se esté usando"
       },
       "splash": {
         "image": "./assets/img/splash-screens/ios/splash.png",
@@ -29,9 +29,9 @@
       }
     },
     "android": {
-      "package": "com.madisonmk.sansilvestretracker",
+      "package": "com.madisonmk.pucelarun2021tracker",
       "versionCode": 4,      
-      "permissions" : ["LOCATION", "ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "FOREGROUND_SERVICE"],
+      "permissions" : ["LOCATION", "ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION", "ACCESS_BACKGROUND_LOCATION", "FOREGROUND_SERVICE", "VIBRATE"],
       "splash": {
         "ldpi": "./assets/img/splash-screens/android/drawable-ldpi/splash.png",
         "mdpi": "./assets/img/splash-screens/android/drawable-mdpi/splash.png",

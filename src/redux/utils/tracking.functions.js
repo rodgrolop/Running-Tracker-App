@@ -87,7 +87,6 @@ export const getCurrentPosition = async () => {
 } 
 
 export const startBackgroundLocationService = async () => {
-    console.log(currentPosition)
     const currentPosition = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Highest })
     
     if (currentPosition) {
@@ -103,8 +102,8 @@ export const startBackgroundService = () => {
     Location.startLocationUpdatesAsync(TASK_FETCH_LOCATION, {
         accuracy: 5,
         distanceInterval: 1, // minimum change (in meters) betweens updates
-        timeInterval : 3000,
-        deferredUpdatesInterval: 3000, // minimum interval (in milliseconds) between updates
+        timeInterval : 1000,
+        deferredUpdatesInterval: 1000, // minimum interval (in milliseconds) between updates
         activityType : 3,
         pausesUpdatesAutomatically: true,
         // foregroundService is how you get the task to be updated as often as would be if the app was open
