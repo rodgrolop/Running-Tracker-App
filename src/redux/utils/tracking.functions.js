@@ -1,7 +1,7 @@
 import * as TaskManager from 'expo-task-manager'
 import * as Location from 'expo-location'
 import { calcDistance, filterCoords } from './tracking.helpers'
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import pick from 'lodash/pick'
 import last from 'lodash/last'
 

@@ -4,7 +4,7 @@ import * as Linking from "expo-linking";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { View, StyleSheet, Text, Alert, Image } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { userLogout } from "../../redux/actions/user.actions";
 import store from "../../redux/store";
 

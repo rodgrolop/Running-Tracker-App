@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { enableScreens } from "react-native-screens";
 import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import theme from "./src/theme";
 
 // Redux imports
